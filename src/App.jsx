@@ -1,27 +1,22 @@
 import { useState } from 'react'
+import searchPokemon from './services/pokeapi';
 function App() {
   const [pokemon, setPokemon] = useState(null);
   const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const searchPokemon = async (pokemon)=>{
+  const handleSearch = async (pokemon)=>{
     setLoading(true);
     setError(null);
     setPokemonData(null);
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`);
-      const data = await response.json();
+      const data = await searchPokemon(pokemon);
       setPokemonData(data);
-    } catch (err) {
+    } catch (err){
       setError(err);
     } finally {
       setLoading(false);
     }
-    // fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.toLowerCase()}`)
-    // .then(response => response.json())
-    // .then(data => setPokemonData(data))
-    // .catch(error => setError(error) )
-    // .finally(() => setLoading(false));
   }
 return (
   <div className="App">
@@ -32,8 +27,8 @@ return (
         type="text"
         placeholder="Enter Pokemon name"
         onChange={(e) => setPokemon(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && searchPokemon(pokemon)}/>
-      <button onClick={() => searchPokemon(pokemon)}>Search</button>
+        onKeyDown={(e) => e.key === 'Enter' && handleSearch(pokemon)}/>
+      <button onClick={() => handleSearch(pokemon)}>Search</button>
       {loading ? (
         <div className="spinner-container">
           <div className="spinner-border text-success" role="status"></div>
