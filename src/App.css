@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  /* COLOURS */
+  --color-navy: #102937;
+  --color-navy-dark: #091d26;
+  --color-teal: #124d54;
+  --color-coral: #f9744b;
+  --color-coral-dark: #d84f2a;
+  --color-beige: #e1d9cf;
+  --color-off-white: #f4f0eb;
+  --color-card: #ffffff;
+  /* FONTS */
+  --font-outfit: "Outfit", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
