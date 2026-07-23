@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {Zap, Search} from 'lucide-react'
+import {Zap, Search, Heart} from 'lucide-react'
 import searchPokemon from './services/pokeapi';
 import Idle from './components/Idle';
 function App() {
@@ -51,6 +51,15 @@ return (
       </div>
     </div>
     <Idle/>
+    <div className='flex flex-row gap-1.5 items-center mt-8 text-gray-500 font-outfit text-md'>
+      Made with
+      <Heart className="text-coral font-outfit font-bold"/> by
+      <a href='https://github.com/abhi-ghosh' target='_blank' rel='noreferrer'
+        className="text-coral font-outfit font-bold
+        hover:text-black transition-color duration-200">
+          Abhijit Ghosh
+      </a>
+    </div>
   </div>
 )
 }
