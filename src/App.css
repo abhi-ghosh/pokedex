@@ -14,3 +14,4 @@
   --font-outfit: "Outfit", sans-serif;
   --font-mono: "DM Mono", monospace;
 }
+@custom-variant dark (&:where(.dark, .dark *));
