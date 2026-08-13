@@ -6,26 +6,9 @@ import Searchbar from './components/Searchbar';
 import Footer from './components/Footer';
 import { motion } from "motion/react"
 import searchPokemon from './services/pokeapi';
-import Idle from './components/Idle';
+import UIStatus from './components/UIStatus';
 function App() {
   const [state, setState] = useState(States.IDLE);
-  // switch (state) {
-  //   case States.IDLE:
-  //     return <Idle/>;
-  //     break;
-  //   case States.LOADING:
-  //     return <Loading/>;
-  //     break;
-  //   case States.RESULT:
-  //     return <Result/>;
-  //     break;
-  //   case States.ERROR:
-  //     return <Error/>;
-  //     break;
-  //   default:
-  //     return <Idle/>;
-  //     break;
-  // }
   const [darkMode, setDarkMode] = useState(false);
   const changeTheme = () => {
     setDarkMode(prev=>!prev);
@@ -65,7 +48,7 @@ return (
                 disabled = {state === States.LOADING}
       />
     </motion.div>
-    <Idle state={state} error={error}/>
+    <UIStatus state={state} error={error}/>
     <Footer/>
   </div>
 )
