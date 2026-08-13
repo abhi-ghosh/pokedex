@@ -28,31 +28,26 @@ function App() {
   // }
   const [darkMode, setDarkMode] = useState(false);
   const changeTheme = () => {
-    const change = !darkMode;
-    setDarkMode(change);
-    document.documentElement.classList.toggle("dark",change);
-    console.log("theme changed")
+    setDarkMode(prev=>!prev);
   }
-
   useEffect(() => {
     document.documentElement.classList.toggle("dark",darkMode);
   }, [darkMode]);
-
   const [searchQuery, setSearchQuery] = useState(null);
   const [pokemonData, setPokemonData] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const handleSearch = async (pokemon)=>{
-    setLoading(true);
+    setState(States.LOADING);
     setError(null);
     setPokemonData(null);
     try {
       const data = await searchPokemon(pokemon);
       setPokemonData(data);
+      // setState(States.RESULT);
     } catch (err){
       setError(err);
-    } finally {
-      setLoading(false);
+      console.log ("Error");
+      // setState(States.ERROR);
     }
   }
 return (
@@ -66,9 +61,11 @@ return (
       <Searchbar searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
                 handleSearch={handleSearch}
+                state={state}
+                disabled = {state === States.LOADING}
       />
     </motion.div>
-    <Idle/>
+    <Idle state={state} error={error}/>
     <Footer/>
   </div>
 )

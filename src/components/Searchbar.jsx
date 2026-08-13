@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 import { Search } from 'lucide-react'
-export default function Searchbar({searchQuery, setSearchQuery, handleSearch}) {
+export default function Searchbar({searchQuery, setSearchQuery, handleSearch, disabled}) {
   return (
       <div className="bg-white dark:bg-navy h-18 w-full p-3.5 rounded-2xl search-container
             flex flex-row items-center justify-center gap-2 shadow-md">
@@ -11,10 +11,12 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch}) {
           placeholder="Search for a Pokémon..."
           onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch(searchQuery)}/>
-        <motion.button className="bg-coral h-full px-6 rounded-3xl text-off-white cursor-pointer"
+        <motion.button className="bg-coral h-full px-6 rounded-3xl text-off-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
                 whileHover={{ scale: 1.05}}
                 whileTap={{ scale: 0.95, backgroundColor: '#091d26', color: '#f4f0eb' }}
-                onClick={() => handleSearch(searchQuery)}>Search
+                onClick={() => handleSearch(searchQuery)}
+                disabled={disabled}>
+                  Search
         </motion.button>
       </div>
   )
