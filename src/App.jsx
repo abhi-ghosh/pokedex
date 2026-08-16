@@ -19,6 +19,7 @@ function App() {
   //* Theme state (darkMode on or off)
   const [darkMode, setDarkMode] = useState(false);
 
+
   //* Function to change theme
   const changeTheme = () => {
     setDarkMode(prev=>!prev);
@@ -75,7 +76,7 @@ return (
       <UIStatus state={state} error={error}/> :
       <Results pokemonData={pokemonData}>
         <ImageContainer pokemonData={pokemonData} darkMode={darkMode}/>
-        <Stats pokemonData={pokemonData}/>
+        <Stats pokemonData={pokemonData} darkMode={darkMode}/>
       </Results>
     }
 

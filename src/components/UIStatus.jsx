@@ -124,14 +124,14 @@ export default function Idle({state, error}) {
           {title}
           {/*//* Idle Subtitle */}
           {state === States.IDLE &&
-          <motion.p className="text-gray-500 font-outfit text-md"
+          <motion.p className="text-center text-gray-500 font-outfit text-md"
             key="idle-subtitle"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.25 }}
             >
-            Search for a Pokémon above to get started...
+            Search for a Pokémon to get started
           </motion.p>}
         </AnimatePresence>
     </motion.div>

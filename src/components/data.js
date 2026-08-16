@@ -30,4 +30,7 @@ const statColors = {
   speed:             { label: "Speed",  color: "#16a34a" },
 };
 
-export { typeColors, statColors };
+//Stat buttons
+const statButtons = ["Stats","Moves","Info"];
+
+export { typeColors, statColors, statButtons };

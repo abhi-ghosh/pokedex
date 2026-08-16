@@ -4,7 +4,7 @@ export default function ThemeToggle ({darkMode, changeTheme}){
   return (
     //* Light or Dark theme toggle button
     <motion.button className="bg-white dark:bg-navy h-10 px-4
-      rounded-3xl text-off-white cursor-pointer
+      rounded-2xl md:rounder-3xl text-off-white cursor-pointer
       absolute top-0 right-0 flex items-center justify-center gap-2
       shadow-md transition-colors duration-300"
       onClick={changeTheme}
@@ -12,7 +12,8 @@ export default function ThemeToggle ({darkMode, changeTheme}){
       whileTap={{ scale: 0.95}}
     >
       {/*//* Light or Dark button text */}
-      <p className={`text-gray-500 dark:text-off-white font-outfit text-md`}>
+      <p className="text-gray-500 hidden dark:text-off-white
+        font-outfit text-md md:block">
         {darkMode ? 'Light' : 'Dark'}
       </p>
       {/*//* Sun or Moon icon from Luicide */}

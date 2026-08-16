@@ -1,27 +1,57 @@
-import { motion } from "motion/react"
+import {useState} from "react";
+import { AnimatePresence, motion } from "motion/react"
 import {typeColors} from "./data";
 export default function ImageContainer({pokemonData, darkMode}) {
+
+  //* Capitalizing 1st letter of pokemon name
   const pokemonName = pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1);
+
+  //* Getting the theme color of the pokemon based on it's type
   const shadowColor = typeColors[pokemonData.types[0].type.name].color;
+
+  //* Image loaded state
+  const[isLoaded, setIsLoaded] = useState(false);
 
     return (
     //* Image & Text Container
-    <div className="w-full h-full flex
+    <div className="w-full h-full flex border-b md:border-b-0 md:border-r
+    border-gray-200 dark:border-gray-700
       flex-col justify-center items-center flex-1 py-10
-      gap-6 transition-colors duration-300"
+      gap-6 transition-colors duration-300 rounded-t-2xl
+      md:rounded-tl-2xl md:rounded-bl-2xl md:rounded-tr-none"
+      style={{
+        backgroundColor: `${shadowColor}10`,
+      }}
     >
       {/*//* Image */}
-      <motion.img
-        src={pokemonData.sprites.other.dream_world.front_default}
-        alt={pokemonData.name}
-        className="w-60 h-60 object-fill"
-        style={{
-          filter: `drop-shadow(0 24px 64px ${shadowColor})`
-        }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.25 }}
-      />
+      <div className="relative w-60 h-60 flex items-center justify-center">
+        {/*//* "Loading..." animation if the image isn't loaded yet" */}
+        {!isLoaded &&
+        <AnimatePresence>
+          <motion.p className="font-mono dark:text-off-white
+            font-bold absolute animate-pulse"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Loading...
+          </motion.p>
+        </AnimatePresence>
+        }
+        <motion.img
+          src={pokemonData.sprites.other.dream_world.front_default}
+          alt={pokemonData.name}
+          className="w-60 h-60 object-fill"
+          style={{
+            filter: `drop-shadow(0 24px 64px ${shadowColor})`
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={isLoaded ? { opacity: 1, scale: 1}:{ opacity: 0, scale: 0}}
+          transition={{ duration: 0.25 }}
+          onLoad={() => setIsLoaded(true)}
+        />
+      </div>
       {/*//* Number, Name and Types */}
       <div className="flex flex-col items-center gap-3">
         {/*//* Number */}
