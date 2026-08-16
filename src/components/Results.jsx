@@ -6,7 +6,7 @@ export default function Results({children}){
         className="bg-white dark:bg-navy flex
           flex-col md:flex-row lg:flex-row
           justify-between max-w-4xl rounded-2xl shadow-md
-          w-full transition-colors duration-300"
+          w-full transition-colors duration-300 overflow-visible"
           initial={{scale:0}} animate={{scale:1}}
       >
       {/*//* Search results - ImageContainer & Stats */}

@@ -24,7 +24,7 @@ export default function ImageContainer({pokemonData, darkMode}) {
       }}
     >
       {/*//* Image */}
-      <div className="relative w-60 h-60 flex items-center justify-center">
+      <div className="relative w-60 h-60 flex items-center justify-center overflow-visible">
         {/*//* "Loading..." animation if the image isn't loaded yet" */}
         {!isLoaded &&
         <AnimatePresence>
