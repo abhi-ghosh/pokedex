@@ -18,7 +18,7 @@ export default function ImageContainer({pokemonData, darkMode}) {
     border-gray-200 dark:border-gray-700
       flex-col justify-center items-center flex-1 py-10
       gap-6 transition-colors duration-300 rounded-t-2xl
-      md:rounded-tl-2xl md:rounded-bl-2xl md:rounded-tr-none"
+      md:rounded-tl-2xl md:rounded-bl-2xl md:rounded-tr-none overflow-hidden"
       style={{
         backgroundColor: `${shadowColor}10`,
       }}
