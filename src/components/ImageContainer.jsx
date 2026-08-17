@@ -24,7 +24,7 @@ export default function ImageContainer({pokemonData, darkMode}) {
       }}
     >
       {/*//* Image */}
-      <div className="relative w-60 h-60 flex items-center justify-center overflow-visible">
+      <div className="relative w-60 h-60 flex items-center justify-center">
         {/*//* "Loading..." animation if the image isn't loaded yet" */}
         {!isLoaded &&
         <AnimatePresence>
@@ -44,7 +44,8 @@ export default function ImageContainer({pokemonData, darkMode}) {
           alt={pokemonData.name}
           className="w-60 h-60 object-fill"
           style={{
-            filter: `drop-shadow(0 24px 64px ${shadowColor})`
+            filter: `drop-shadow(0 24px 64px ${shadowColor})`,
+            willChange: "filter"
           }}
           initial={{ opacity: 0, scale: 0 }}
           animate={isLoaded ? { opacity: 1, scale: 1}:{ opacity: 0, scale: 0}}
