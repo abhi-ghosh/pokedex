@@ -76,7 +76,7 @@ return (
       <UIStatus state={state} error={error}/> :
       <Results pokemonData={pokemonData}>
         <ImageContainer pokemonData={pokemonData} darkMode={darkMode}/>
-        <Stats pokemonData={pokemonData} darkMode={darkMode}/>
+        <Stats pokemonData={pokemonData}/>
       </Results>
     }
 

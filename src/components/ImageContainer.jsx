@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { AnimatePresence, motion } from "motion/react"
+import {ImageOff} from "lucide-react";
 import {typeColors} from "./data";
 export default function ImageContainer({pokemonData, darkMode}) {
 
@@ -10,7 +11,7 @@ export default function ImageContainer({pokemonData, darkMode}) {
   const shadowColor = typeColors[pokemonData.types[0].type.name].color;
 
   //* Image loaded state
-  const[isLoaded, setIsLoaded] = useState(false);
+  const[imageStatus, setImageStatus] = useState("loading");
 
     return (
     //* Image & Text Container
@@ -23,10 +24,10 @@ export default function ImageContainer({pokemonData, darkMode}) {
         backgroundColor: `${shadowColor}10`,
       }}
     >
-      {/*//* Image */}
+      {/*//* Image Container */}
       <div className="relative w-60 h-60 flex items-center justify-center">
         {/*//* "Loading..." animation if the image isn't loaded yet" */}
-        {!isLoaded &&
+        {imageStatus === "loading" &&
         <AnimatePresence>
           <motion.p className="font-mono dark:text-off-white
             font-bold absolute animate-pulse"
@@ -39,6 +40,23 @@ export default function ImageContainer({pokemonData, darkMode}) {
           </motion.p>
         </AnimatePresence>
         }
+        {/*//* "Error message" if the image fails to load" */}
+        {imageStatus === "error" &&
+        <AnimatePresence>
+          <motion.div className="font-mono flex flex-col gap-4
+            justify-center items-center dark:text-off-white
+            font-bold absolute"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ImageOff className="w-10 h-auto"/>
+            <p className="text-center">Image can't be loaded, Sorry :(</p>
+          </motion.div>
+        </AnimatePresence>
+        }
+        {/*//* Pokemon image */}
         <motion.img
           src={pokemonData.sprites.other.dream_world.front_default}
           alt={pokemonData.name}
@@ -48,9 +66,10 @@ export default function ImageContainer({pokemonData, darkMode}) {
             willChange: "filter"
           }}
           initial={{ opacity: 0, scale: 0 }}
-          animate={isLoaded ? { opacity: 1, scale: 1}:{ opacity: 0, scale: 0}}
+          animate={imageStatus === "loaded" ? { opacity: 1, scale: 1}:{ opacity: 0, scale: 0}}
           transition={{ duration: 0.25 }}
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => setImageStatus("loaded")}
+          onError={() => setImageStatus("error")}
         />
       </div>
       {/*//* Number, Name and Types */}
