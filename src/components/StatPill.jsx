@@ -11,7 +11,7 @@ export default function StatPill({stat,name,color}){
           }
           initial={{width:0}}
           animate={{width:`${stat}%`}}
-          transition={{duration: 1, ease:"easeOut"}}
+          transition={{duration: 0.5, ease:"easeOut"}}
         >
         </motion.div>
       </div>

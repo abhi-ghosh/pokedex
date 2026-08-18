@@ -1,16 +1,10 @@
-import { useState } from "react";
 import {statButtons} from "./data";
-import StatPill from "./StatPill";
-import { statColors } from "./data";
-export default function Stats({pokemonData}){
-
-  //* Button state for stat buttons (Stats, Moves, Info)
-  const [button, setButton] = useState("Stats");
+export default function Stats({button, setButton, children}) {
 
   return (
     //*Stats section div
     <div className="flex-1 w-full md:max-w-1/2 bg-card
-    dark:bg-navy flex flex-col justify-top gap-5 p-10 px-4
+    dark:bg-navy flex flex-col justify-between gap-5 p-10 px-4
       md:p-10 rounded-b-2xl md:rounded-r-2xl transition-colors duration-300"
     >
       {/*//* Stat buttons div */}
@@ -31,23 +25,7 @@ export default function Stats({pokemonData}){
           </button>
         ))}
       </div>
-      {/*//* Base stats & total stat */}
-      <div className="flex flex-row align-center text-gray-500
-      justify-between">
-        <p className="font-bold font-outfit">BASE STATS</p>
-        <p className="font-bold font-mono">
-          Total: {pokemonData.stats.reduce((acc, stat) => acc + stat.base_stat, 0)}
-        </p>
-      </div>
-      {/*//* Stat pills (progress bars) mapped over stats array */}
-      <div className="flex flex-col gap-3">
-        {pokemonData.stats.map((stat) => (
-          <StatPill stat={stat.base_stat} key={stat.stat.name}
-            name={statColors[stat.stat.name].label}
-            color={statColors[stat.stat.name].color}
-          />
-        ))}
-      </div>
+      {children}
     </div>
   )
 }

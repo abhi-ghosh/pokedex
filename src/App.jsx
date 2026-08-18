@@ -10,6 +10,10 @@ import UIStatus from './components/UIStatus';
 import Results from './components/Results';
 import Stats from './components/Stats';
 import ImageContainer from './components/ImageContainer';
+import BaseStats from './components/BaseStats';
+import Info from './components/Info'
+import Moves from './components/Moves'
+import {typeColors} from "./components/data";
 
 //* Main App
 function App() {
@@ -18,7 +22,6 @@ function App() {
 
   //* Theme state (darkMode on or off)
   const [darkMode, setDarkMode] = useState(false);
-
 
   //* Function to change theme
   const changeTheme = () => {
@@ -32,8 +35,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState(null);
 
   //* Pokemon (after search response)
-  const [pokemonData, setPokemonData] = useState(null);
-
+  const [data, setData] = useState(null);
+  const pokemonData = data?.pokemon;
+  const pokemonSpecies = data?.species;
   //* Error
   const [error, setError] = useState(null);
 
@@ -41,17 +45,42 @@ function App() {
   const handleSearch = async (pokemon)=>{
     setState(States.LOADING);
     setError(null);
-    setPokemonData(null);
+    setData(null);
     //* API (service) returns a promise so we need to await it
     try {
       const data = await searchPokemon(pokemon);
-      setPokemonData(data);
+      setData(data);
       setState(States.RESULT);
     } catch (err){
       setError(err);
       setState(States.ERROR);
     }
   }
+
+  //* Getting the theme color of the pokemon based on it's type
+  const shadowColor = pokemonData
+    ? typeColors[pokemonData.types[0].type.name].color
+    : null;
+
+
+  //* Button state for stat buttons (Stats, Moves, Info)
+  const [button, setButton] = useState("Stats");
+  //* Which state is rendered based on "button"
+  let stat;
+  switch (button) {
+    case ("Stats"):
+      stat = <BaseStats pokemonData={pokemonData}/>;
+      break;
+    case ("Moves"):
+      stat = <Moves pokemonData={pokemonData} shadowColor={shadowColor}/>;
+      break;
+    case ("Info"):
+      stat = <Info pokemonData={pokemonData} pokemonSpecies={pokemonSpecies}/>;
+      break;
+    default:
+      stat = <BaseStats pokemonData={pokemonData}/>;
+  }
+
 return (
   //* Main App
   <div className="flex flex-col items-center justify-center min-h-screen
@@ -75,8 +104,12 @@ return (
     {state !== States.RESULT ?
       <UIStatus state={state} error={error}/> :
       <Results pokemonData={pokemonData}>
-        <ImageContainer pokemonData={pokemonData} darkMode={darkMode}/>
-        <Stats pokemonData={pokemonData}/>
+        <ImageContainer pokemonData={pokemonData} darkMode={darkMode}
+          typeColors={typeColors} shadowColor={shadowColor}
+        />
+        <Stats button={button} setButton={setButton}>
+          {stat}
+        </Stats>
       </Results>
     }
 

@@ -1,14 +1,16 @@
 import {useState} from "react";
 import { AnimatePresence, motion } from "motion/react"
 import {ImageOff} from "lucide-react";
-import {typeColors} from "./data";
-export default function ImageContainer({pokemonData, darkMode}) {
+import CryAudio from "./CryAudio";
+export default function ImageContainer({pokemonData, darkMode, typeColors, shadowColor }) {
 
-  //* Capitalizing 1st letter of pokemon name
-  const pokemonName = pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1);
-
-  //* Getting the theme color of the pokemon based on it's type
-  const shadowColor = typeColors[pokemonData.types[0].type.name].color;
+  //* Capitalizing 1st letter of pokemon name and removing "-" if it exists
+  //* and replacing it with a space
+  const pokemonName = pokemonData.name
+    //* Removing all "-" and replacing it with a space
+    .replaceAll("-", " ")
+    //* Capitalizing 1st letter and the letters after space
+    .replace(/\b\w/g, char => char.toUpperCase());
 
   //* Image loaded state
   const[imageStatus, setImageStatus] = useState("loading");
@@ -82,8 +84,14 @@ export default function ImageContainer({pokemonData, darkMode}) {
         >
           #{pokemonData.id.toString().padStart(3, "0")}
         </p>
-        {/*//* Name */}
-        <p className="font-outfit dark:text-off-white font-bold text-3xl">{pokemonName}</p>
+        {/*//* Name & Cry Audio */}
+        <div className="flex flex-row gap-3 justify-center items-center px-10">
+          <p className="font-outfit dark:text-off-white font-bold text-3xl">
+            {pokemonName}
+          </p>
+          {/*//* Pokemon cry audio */}
+          <CryAudio pokemonData={pokemonData}/>
+        </div>
         {/*//* Types */}
         <div className="flex gap-3">
           {pokemonData.types.map((t) => (
