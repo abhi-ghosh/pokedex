@@ -1,7 +1,9 @@
 import { motion } from "framer-motion"
 export default function StatPill({stat,name,color}){
   return (
-    <div className="flex flex-row font-mono gap-3 items-center justify-between">
+    <div className="flex flex-row font-mono gap-3 items-center
+      justify-between transition-colors duration-300"
+    >
       <p className="font-bold w-15 text-right text-gray-500 dark:text-gray-400">{name}</p>
       <div className="h-3 rounded-full bg-beige dark:bg-navy-dark flex-3 overflow-hidden">
         <motion.div className="h-full"
@@ -13,7 +15,9 @@ export default function StatPill({stat,name,color}){
         >
         </motion.div>
       </div>
-      <p className="font-bold text-lg dark:text-off-white">{stat}</p>
+      <p className="font-bold text-lg w-8 text-right dark:text-off-white">
+        {stat}
+      </p>
     </div>
   )
 }
