@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react"
 export default function BaseStats({pokemonData}){
   return (
   <AnimatePresence>
-    <motion.div className="flex flex-col gap-5 h-full"
+    <motion.div className="flex flex-col justify-between gap-5 h-full"
       initial={{opacity:0}}
       animate={{opacity:1}}
       exit={{opacity:0}}
@@ -28,7 +28,7 @@ export default function BaseStats({pokemonData}){
         ))}
       </div>
       <div className="w-full h-full flex flex-col p-3 md:p-0
-        justify-center items-center gap-2 bg-off-white
+        justify-center items-center gap-3 bg-off-white
         dark:bg-navy-dark rounded-2xl"
       >
         <p className="font-bold font-outfit text-gray-500 dark:text-gray-400">

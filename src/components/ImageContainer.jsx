@@ -2,6 +2,7 @@ import {useState} from "react";
 import { AnimatePresence, motion } from "motion/react"
 import {ImageOff} from "lucide-react";
 import CryAudio from "./CryAudio";
+import InfoPill from "./InfoPill";
 export default function ImageContainer({pokemonData, darkMode, typeColors, shadowColor }) {
 
   //* Capitalizing 1st letter of pokemon name and removing "-" if it exists
@@ -17,9 +18,10 @@ export default function ImageContainer({pokemonData, darkMode, typeColors, shado
 
     return (
     //* Image & Text Container
-    <div className="w-full h-full flex border-b md:border-b-0 md:border-r
+    <div className="w-full md:max-w-1/2 h-140 flex border-b
+      md:border-b-0 md:border-r
     border-gray-200 dark:border-gray-700
-      flex-col justify-center items-center flex-1 py-10
+      flex-col justify-center items-center flex-1 p-10
       gap-6 transition-colors duration-300 rounded-t-2xl
       md:rounded-tl-2xl md:rounded-bl-2xl md:rounded-tr-none overflow-hidden"
       style={{
@@ -60,7 +62,10 @@ export default function ImageContainer({pokemonData, darkMode, typeColors, shado
         }
         {/*//* Pokemon image */}
         <motion.img
-          src={pokemonData.sprites.other.dream_world.front_default}
+          src={pokemonData.sprites.other.dream_world.front_default ||
+            pokemonData.sprites.other["official-artwork"].front_default ||
+            pokemonData.sprites.front_default
+          }
           alt={pokemonData.name}
           className="w-60 h-60 object-fill"
           style={{
@@ -85,7 +90,7 @@ export default function ImageContainer({pokemonData, darkMode, typeColors, shado
           #{pokemonData.id.toString().padStart(3, "0")}
         </p>
         {/*//* Name & Cry Audio */}
-        <div className="flex flex-row gap-3 justify-center items-center px-10">
+        <div className="flex gap-3 justify-center items-center">
           <p className="font-outfit dark:text-off-white font-bold text-3xl">
             {pokemonName}
           </p>
@@ -95,20 +100,12 @@ export default function ImageContainer({pokemonData, darkMode, typeColors, shado
         {/*//* Types */}
         <div className="flex gap-3">
           {pokemonData.types.map((t) => (
-            <p className="font-mono font-bold text-xs py-1 px-3 rounded-2xl"
-              key={t.type.name}
-              style={!darkMode ? {
-                color: typeColors[t.type.name].color,
-                backgroundColor: typeColors[t.type.name].bg,
-                border: `1px solid ${typeColors[t.type.name].color}`
-              }: {
-                color: "var(--color-off-white)",
-                backgroundColor: `${typeColors[t.type.name].color}30`,
-                border: `1px solid ${typeColors[t.type.name].color}`,
-              }}
-            >
-              {t.type.name.toUpperCase()}
-            </p>
+            //* Type info pill
+            <InfoPill info={t.type.name.toUpperCase()} key={t.type.name}
+              color={!darkMode ? typeColors[t.type.name].color : "var(--color-off-white)"}
+              backgroundColor={!darkMode ? typeColors[t.type.name].bg : `${typeColors[t.type.name].color}30`}
+              borderColor = {typeColors[t.type.name].color}
+              />
           ))}
         </div>
       </div>

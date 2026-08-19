@@ -38,6 +38,7 @@ function App() {
   const [data, setData] = useState(null);
   const pokemonData = data?.pokemon;
   const pokemonSpecies = data?.species;
+
   //* Error
   const [error, setError] = useState(null);
 
@@ -46,6 +47,7 @@ function App() {
     setState(States.LOADING);
     setError(null);
     setData(null);
+    setButton("Stats");
     //* API (service) returns a promise so we need to await it
     try {
       const data = await searchPokemon(pokemon);
@@ -72,10 +74,15 @@ function App() {
       stat = <BaseStats pokemonData={pokemonData}/>;
       break;
     case ("Moves"):
-      stat = <Moves pokemonData={pokemonData} shadowColor={shadowColor}/>;
+      stat = <Moves pokemonData={pokemonData}
+                    shadowColor={shadowColor}
+              />;
       break;
     case ("Info"):
-      stat = <Info pokemonData={pokemonData} pokemonSpecies={pokemonSpecies}/>;
+      stat = <Info pokemonData={pokemonData}
+                  pokemonSpecies={pokemonSpecies}
+                  shadowColor={shadowColor}
+              />;
       break;
     default:
       stat = <BaseStats pokemonData={pokemonData}/>;
