@@ -4,7 +4,7 @@ import Header from './components/Header';
 import ThemeToggle from './components/ThemeToggle';
 import Searchbar from './components/Searchbar';
 import Footer from './components/Footer';
-import { motion } from "motion/react"
+import { color, motion } from "motion/react"
 import searchPokemon from './services/pokeapi';
 import UIStatus from './components/UIStatus';
 import Results from './components/Results';
@@ -64,7 +64,6 @@ function App() {
     ? typeColors[pokemonData.types[0].type.name].color
     : null;
 
-
   //* Button state for stat buttons (Stats, Moves, Info)
   const [button, setButton] = useState("Stats");
   //* Which state is rendered based on "button"
@@ -82,12 +81,12 @@ function App() {
       stat = <Info pokemonData={pokemonData}
                   pokemonSpecies={pokemonSpecies}
                   shadowColor={shadowColor}
+                  darkMode={darkMode}
               />;
       break;
     default:
       stat = <BaseStats pokemonData={pokemonData}/>;
   }
-
 return (
   //* Main App
   <div className="flex flex-col items-center justify-center min-h-screen

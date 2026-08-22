@@ -31,7 +31,7 @@ const statColors = {
 };
 
 //* Pokemon type effectiveness
-const typeDefense = {
+const typeMatchup = {
   normal: {
     weak: ["fighting"],
     resist: [],
@@ -41,6 +41,11 @@ const typeDefense = {
     weak: ["water", "ground", "rock"],
     resist: ["fire", "grass", "ice", "bug", "steel", "fairy"],
     immune: []
+  },
+  flying: {
+    weak: ["electric", "ice", "rock"],
+    resist: ["grass", "fighting", "bug"],
+    immune: ["ground"]
   },
   water: {
     weak: ["electric", "grass"],
@@ -76,11 +81,6 @@ const typeDefense = {
     weak: ["water", "grass", "ice"],
     resist: ["poison", "rock"],
     immune: ["electric"]
-  },
-  flying: {
-    weak: ["electric", "ice", "rock"],
-    resist: ["grass", "fighting", "bug"],
-    immune: ["ground"]
   },
   psychic: {
     weak: ["bug", "ghost", "dark"],
@@ -130,4 +130,4 @@ const typeDefense = {
 //* Stat buttons
 const statButtons = ["Stats","Moves","Info"];
 
-export { typeColors, statColors, statButtons, typeDefense };
+export { typeColors, statColors, statButtons, typeMatchup };
