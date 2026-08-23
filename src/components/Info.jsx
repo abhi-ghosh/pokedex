@@ -2,7 +2,11 @@ import InfoPill from "./InfoPill";
 import { typeColors, typeMatchup } from "./data";
 import { AnimatePresence, motion } from "motion/react"
 import ClassTab from "./ClassTab";
-export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode}) {
+import AbilityPill from "./AbilityPill";
+export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode, abilities}) {
+
+  //* Section Style
+  const sectionStyle = "leading-none text-xl font-bold text-md font-outfit text-gray-500 dark:text-gray-400";
 
   //* Gender calculation for Pokémon
   const femaleGender = ((pokemonSpecies.gender_rate/8)*100)
@@ -18,15 +22,52 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
     gender = `${Math.round(femaleGender)}% Female | ${Math.round(maleGender)}% Male`
   }
 
+  console.log(abilities)
+
   //* Pokemon classification data
   const classification = [
-      {title: "GENERATION", info: `Gen ${pokemonSpecies.generation.name.split("-")[1].toUpperCase()}`},
-      {title: "HABITAT", info: pokemonSpecies.habitat ? pokemonSpecies.habitat.name : "Unknown"},
-      {title:"CATCH RATE", info: `${pokemonSpecies.capture_rate} (${Math.round((pokemonSpecies.capture_rate / 255) * 100)}%}`},
-      {title:"HAPPINESS", info: pokemonSpecies.base_happiness},
-      {title:"GROWTH RATE", info:pokemonSpecies.growth_rate.name},
-      {title:"EGG GROUPS", info: pokemonSpecies.egg_groups.map((group) => group.name).join(", ")},
-      {title:"GENDER", info: gender}
+      {
+        title: "GENERATION",
+        info: `Gen ${pokemonSpecies.generation.name.split("-")[1].toUpperCase()}`,
+        color: "#f9744b"
+      },
+      {
+        title: "HABITAT",
+        info: pokemonSpecies.habitat ? pokemonSpecies.habitat.name[0].toUpperCase() +
+        pokemonSpecies.habitat.name.slice(1) : "Unknown",
+        color: "#ef4444"
+      },
+      {
+        title:"CATCH RATE",
+        info: `${pokemonSpecies.capture_rate}(${Math.round((pokemonSpecies.capture_rate / 255) * 100)}%)`,
+        color: "#14b8a6"
+      },
+      {
+        title:"HAPPINESS",
+        info: pokemonSpecies.base_happiness,
+        color: "#8b5cf6"
+      },
+      {
+        title:"GROWTH RATE",
+        info:pokemonSpecies.growth_rate.name[0].toUpperCase() + pokemonSpecies.growth_rate.name.slice(1),
+        color: "#0891b2"
+      },
+      {
+        title: "EGG CYCLES",
+        info: pokemonSpecies.hatch_counter,
+        color: "#f59e0b"
+      },
+      {
+        title:"EGG GROUPS",
+        info: pokemonSpecies.egg_groups.map((group) =>
+          group.name[0].toUpperCase() + group.name.slice(1)).join(" | "),
+        color: "#16a34a"
+      },
+      {
+        title:"GENDER",
+        info: gender,
+        color: "#ec4899"
+      }
       ]
 
   //* Pokemon quote
@@ -107,7 +148,7 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
   return (
   //* Info Container
     <AnimatePresence>
-      <motion.div className="flex flex-col gap-4 overflow-y-auto scrollbar-none"
+      <motion.div className="flex flex-col gap-6 overflow-y-auto scrollbar-none"
         initial={{opacity:0}}
         animate={{opacity:1}}
         exit={{opacity:0}}
@@ -123,7 +164,8 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
           "{quote?.flavor_text.replace("-", " ").replace("POKéMON", "pokémon")}"
         </p>
         {/*//* Type matchups title */}
-        <p className="leading-none font-bold text-md font-outfit text-gray-500 dark:text-gray-500">
+        <p className= {sectionStyle}
+        >
           TYPE MATCHUPS
         </p>
         {/*//* Type matchups div */}
@@ -176,11 +218,36 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
           </div>
         </div>
         {/*//* Classification title */}
-        <p className="leading-none font-bold text-md font-outfit text-gray-500 dark:text-gray-500">
+        <p className={sectionStyle}>
           CLASSIFICATION
         </p>
-        <div>
-          {classification.map((c) => <ClassTab title={c.title} info={c.info} key={c.title}/>)}
+        <div className="grid grid-cols-3 gap-5">
+          {classification.map((c) =>
+            <ClassTab title={c.title} color={c.color} info={c.info} key={c.title}
+              className={c.title === "GENDER"|| c.title === "EGG GROUPS" ? "col-span-3" : ""}
+            />
+            )
+          }
+        </div>
+        {/*//* Abilities title */}
+        <p className={sectionStyle}>
+          ABILITIES
+        </p>
+        {/*//* Abilities div */}
+        <div className="flex flex-col gap-3">
+          {abilities.map((a,i)=>(
+            <AbilityPill
+              key={a.name}
+              number={i+1}
+              name={a.name[0].toUpperCase()+a.name.slice(1)}
+              description={a.flavor_text_entries.find((f)=>f.language.name==="en").flavor_text}
+              hidden = {pokemonData.abilities[i].is_hidden}
+              darkMode={darkMode} backgroundColor={`${shadowColor}20`}
+              borderColor={typeColors[pokemonData.types[0].type.name].color}
+              color={typeColors[pokemonData.types[0].type.name].color}
+            />
+          ))
+          }
         </div>
       </motion.div>
     </AnimatePresence>

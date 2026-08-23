@@ -1,8 +1,14 @@
-export default function ClassTab({title, info}){
+export default function ClassTab({title, info, className, color}){
   return (
-    <div>
-        <p>{title}</p>
-        <p>{info}</p>
+    <div className={`dark:text-off-white font-outfit flex flex-col gap-1.5 ${className}`}>
+        <p className="font-bold text-xs leading-none"
+          style={{color: color}}
+        >
+          {title}
+        </p>
+        <p className="font-mono leading-none">
+          {info}
+        </p>
     </div>
   )
 }

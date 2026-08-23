@@ -11,11 +11,13 @@
       }
       const data1 = await response1.json();
       const response2 = await fetch (data1.species.url);
-      if (!response2.ok) {
+      const abilitiesArr = await Promise.all(data1.abilities.map(ability => fetch(ability.ability.url)));
+      if (!response2.ok || abilitiesArr.some(response => !response.ok)) {
         throw new Error("server-error");
       }
       const data2 = await response2.json();
-      const data = {pokemon: data1, species: data2};
+      const abilities = await Promise.all(abilitiesArr.map(ability => ability.json()));
+      const data = {pokemon: data1, species: data2, abilities: abilities};
       return data;
   }
   export default searchPokemon;

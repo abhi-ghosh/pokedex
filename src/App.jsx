@@ -38,6 +38,7 @@ function App() {
   const [data, setData] = useState(null);
   const pokemonData = data?.pokemon;
   const pokemonSpecies = data?.species;
+  const abilities = data?.abilities;
 
   //* Error
   const [error, setError] = useState(null);
@@ -82,6 +83,7 @@ function App() {
                   pokemonSpecies={pokemonSpecies}
                   shadowColor={shadowColor}
                   darkMode={darkMode}
+                  abilities={abilities}
               />;
       break;
     default:
