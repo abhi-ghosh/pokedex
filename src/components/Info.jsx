@@ -22,8 +22,6 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
     gender = `${Math.round(femaleGender)}% Female | ${Math.round(maleGender)}% Male`
   }
 
-  console.log(abilities)
-
   //* Pokemon classification data
   const classification = [
       {
@@ -147,109 +145,111 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
 
   return (
   //* Info Container
-    <AnimatePresence>
-      <motion.div className="flex flex-col gap-6 overflow-y-auto scrollbar-none"
-        initial={{opacity:0}}
-        animate={{opacity:1}}
-        exit={{opacity:0}}
-        transition={{duration: 0.15, ease:"easeOut"}}
+    <motion.div className="flex flex-col gap-6 overflow-y-auto scrollbar-none"
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+      transition={{duration: 0.15, ease:"easeOut"}}
+    >
+      {/*//* Pokémon quote */}
+      <p className="font-outfit dark:text-off-white p-3 rounded-2xl"
+        style={
+          { backgroundColor: `${shadowColor}20`,
+            borderLeft: `5px solid ${shadowColor}`
+          }}
       >
-        {/*//* Pokémon quote */}
-        <p className="font-outfit dark:text-off-white p-3 rounded-2xl"
-          style={
-            { backgroundColor: `${shadowColor}20`,
-              borderLeft: `5px solid ${shadowColor}`
-            }}
-        >
-          "{quote?.flavor_text.replace("-", " ").replace("POKéMON", "pokémon")}"
+        "{quote?.flavor_text.replace("-", " ").replace("POKéMON", "pokémon")}"
+      </p>
+      {/*//* Type matchups title */}
+      <p className= {sectionStyle}
+      >
+        TYPE MATCHUPS
+      </p>
+      {/*//* Type matchups div */}
+      <div className="flex flex-col font-outfit gap-3">
+        {/*//* Weak to */}
+        <p className="text-red-600 dark:text-red-400 leading-none font-bold font-mono text-sm">
+          WEAK TO
         </p>
-        {/*//* Type matchups title */}
-        <p className= {sectionStyle}
-        >
-          TYPE MATCHUPS
-        </p>
-        {/*//* Type matchups div */}
-        <div className="flex flex-col font-outfit gap-3">
-          {/*//* Weak to */}
-          <p className="text-red-600 dark:text-red-400 leading-none font-bold font-mono text-sm">
-            WEAK TO
-          </p>
-          {typeObjFinal.weak.length > 0 ?
-          <div className="flex flex-row flex-wrap gap-3">
-            {typeObjFinal.weak.map((t) => (
-              <InfoPill info={t.toUpperCase()}
-                key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
-                backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
-                borderColor={typeColors[t].color}
-                small={true} multiplier={multiplier(t)}
-              />
-            ))}
-          </div> : NA}
-          {/*//* Resist to */}
-          {typeObjFinal.resist.length > 0 &&
-          <p className="text-green-600 dark:text-green-400 leading-none font-bold font-mono text-sm">
-            RESIST
-          </p>}
-          <div className="flex flex-row flex-wrap gap-3">
-            {typeObjFinal.resist.map((t) => (
-              <InfoPill info={t.toUpperCase()}
-                key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
-                backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
-                borderColor={typeColors[t].color}
-                small={true} multiplier={multiplier(t)}
-              />
-            ))}
-          </div>
-          {/*//* Immune to */}
-          {typeObjFinal.immune.length > 0 &&
-          <p className="text-indigo-600 dark:text-indigo-400 leading-none font-bold font-mono text-sm">
-            IMMUNE TO
-          </p>}
-          <div className="flex flex-row flex-wrap gap-3">
-            {typeObjFinal.immune.map((t) => (
-              <InfoPill info={t.toUpperCase()}
-                key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
-                backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
-                borderColor={typeColors[t].color}
-                small={true}
-              />
-            ))
-            }
-          </div>
-        </div>
-        {/*//* Classification title */}
-        <p className={sectionStyle}>
-          CLASSIFICATION
-        </p>
-        <div className="grid grid-cols-3 gap-5">
-          {classification.map((c) =>
-            <ClassTab title={c.title} color={c.color} info={c.info} key={c.title}
-              className={c.title === "GENDER"|| c.title === "EGG GROUPS" ? "col-span-3" : ""}
+        {typeObjFinal.weak.length > 0 ?
+        <div className="flex flex-row flex-wrap gap-3">
+          {typeObjFinal.weak.map((t) => (
+            <InfoPill info={t.toUpperCase()}
+              key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
+              backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
+              borderColor={typeColors[t].color}
+              small={true} multiplier={multiplier(t)}
             />
-            )
-          }
+          ))}
+        </div> : NA}
+        {/*//* Resist to */}
+        {typeObjFinal.resist.length > 0 &&
+        <p className="text-green-600 dark:text-green-400 leading-none font-bold font-mono text-sm">
+          RESIST
+        </p>}
+        <div className="flex flex-row flex-wrap gap-3">
+          {typeObjFinal.resist.map((t) => (
+            <InfoPill info={t.toUpperCase()}
+              key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
+              backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
+              borderColor={typeColors[t].color}
+              small={true} multiplier={multiplier(t)}
+            />
+          ))}
         </div>
-        {/*//* Abilities title */}
-        <p className={sectionStyle}>
-          ABILITIES
-        </p>
-        {/*//* Abilities div */}
-        <div className="flex flex-col gap-3">
-          {abilities.map((a,i)=>(
-            <AbilityPill
-              key={a.name}
-              number={i+1}
-              name={a.name[0].toUpperCase()+a.name.slice(1)}
-              description={a.flavor_text_entries.find((f)=>f.language.name==="en").flavor_text}
-              hidden = {pokemonData.abilities[i].is_hidden}
-              darkMode={darkMode} backgroundColor={`${shadowColor}20`}
-              borderColor={typeColors[pokemonData.types[0].type.name].color}
-              color={typeColors[pokemonData.types[0].type.name].color}
+        {/*//* Immune to */}
+        {typeObjFinal.immune.length > 0 &&
+        <p className="text-indigo-600 dark:text-indigo-400 leading-none font-bold font-mono text-sm">
+          IMMUNE TO
+        </p>}
+        <div className="flex flex-row flex-wrap gap-3">
+          {typeObjFinal.immune.map((t) => (
+            <InfoPill info={t.toUpperCase()}
+              key={t} color={!darkMode ? typeColors[t].color : "var(--color-off-white)"}
+              backgroundColor={!darkMode ? typeColors[t].bg : `${typeColors[t].color}30`}
+              borderColor={typeColors[t].color}
+              small={true}
             />
           ))
           }
         </div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+      {/*//* Classification title */}
+      <p className={sectionStyle}>
+        CLASSIFICATION
+      </p>
+      {/*//* Classification div */}
+      <div className="grid grid-cols-3 gap-5">
+        {classification.map((c) =>
+          <ClassTab title={c.title} color={c.color} info={c.info} key={c.title}
+            className={c.title === "GENDER" && c.info.includes("|") ||
+              c.title === "EGG GROUPS" && c.info.includes("|") ?
+              "col-span-3 lg:col-span-2" : ""
+            }
+          />
+          )
+        }
+      </div>
+      {/*//* Abilities title */}
+      <p className={sectionStyle}>
+        ABILITIES
+      </p>
+      {/*//* Abilities div */}
+      <div className="flex flex-col gap-3">
+        {abilities.map((a,i)=>(
+          <AbilityPill
+            key={a.name}
+            number={i+1}
+            name={a.name[0].toUpperCase()+a.name.slice(1)}
+            description={a.flavor_text_entries.find((f)=>f.language.name==="en").flavor_text}
+            hidden = {pokemonData.abilities[i].is_hidden}
+            darkMode={darkMode} backgroundColor={`${shadowColor}20`}
+            borderColor={typeColors[pokemonData.types[0].type.name].color}
+            color={typeColors[pokemonData.types[0].type.name].color}
+          />
+        ))
+        }
+      </div>
+    </motion.div>
   )
 }

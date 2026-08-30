@@ -1,3 +1,11 @@
+//* APP states
+const states = {
+  IDLE: "idle",
+  LOADING: "loading",
+  RESULT: "result",
+  ERROR: "error"
+};
+
 //* Pokemon type colors
 const typeColors = {
   normal:   { color: "#6b7280", bg: "#f3f4f6" },
@@ -130,4 +138,73 @@ const typeMatchup = {
 //* Stat buttons
 const statButtons = ["Stats","Moves","Info"];
 
-export { typeColors, statColors, statButtons, typeMatchup };
+//* Versions
+const versions = [
+  { name: "Red / Blue", value: "red-blue", color: "#EF4444" },
+
+  { name: "Yellow", value: "yellow", color: "#FACC15" },
+
+  { name: "Gold / Silver", value: "gold-silver", color: "#EAB308" },
+
+  { name: "Crystal", value: "crystal", color: "#22D3EE" },
+
+  { name: "Ruby / Sapphire", value: "ruby-sapphire", color: "#F43F5E" },
+
+  { name: "Emerald", value: "emerald", color: "#10B981" },
+
+  { name: "FireRed / LeafGreen", value: "firered-leafgreen", color: "#F97316" },
+
+  { name: "Diamond / Pearl", value: "diamond-pearl", color: "#60A5FA" },
+
+  { name: "Platinum", value: "platinum", color: "#A8A29E" },
+
+  { name: "HeartGold / SoulSilver", value: "heartgold-soulsilver", color: "#F59E0B" },
+
+  { name: "Black / White", value: "black-white", color: "#737373" },
+
+  { name: "Black 2 / White 2", value: "black-2-white-2", color: "#A3A3A3" },
+
+  { name: "X / Y", value: "x-y", color: "#3B82F6" },
+
+  { name: "Omega Ruby / Alpha Sapphire", value: "omega-ruby-alpha-sapphire", color: "#E11D48" },
+
+  { name: "Sun / Moon", value: "sun-moon", color: "#F97316" },
+
+  { name: "Ultra Sun / Ultra Moon", value: "ultra-sun-ultra-moon", color: "#FB923C" },
+
+  { name: "Let's Go Pikachu / Let's Go Eevee", value: "lets-go-pikachu-lets-go-eevee", color: "#FACC15" },
+
+  { name: "Sword / Shield", value: "sword-shield", color: "#6366F1" },
+
+  { name: "Brilliant Diamond / Shining Pearl", value: "brilliant-diamond-and-shining-pearl", color: "#38BDF8" },
+
+  { name: "Legends: Arceus", value: "legends-arceus", color: "#C2410C" },
+
+  { name: "Scarlet / Violet", value: "scarlet-violet", color: "#E11D48" }
+];
+
+//* Move methods
+const learnMethods = [
+  {
+    name: "level-up",
+    heading: "LEVEL UP",
+    description: "Moves learned when a Pokémon reaches a certain level."
+  },
+  {
+    name: "machine",
+    heading: "TECH MACHINE",
+    description: "Moves learned using a Technical Machine or other move-teaching machine."
+  },
+  {
+    name: "egg",
+    heading: "EGG",
+    description: "Moves passed down to a Pokémon as an Egg Move."
+  },
+  {
+    name: "tutor",
+    heading: "TUTOR",
+    description: "Moves learned from a Move Tutor."
+  }
+];
+
+export { states, typeColors, statColors, statButtons, typeMatchup, versions, learnMethods };

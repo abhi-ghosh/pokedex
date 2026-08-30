@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import States from './components/States';
 import Header from './components/Header';
 import ThemeToggle from './components/ThemeToggle';
 import Searchbar from './components/Searchbar';
@@ -13,12 +12,12 @@ import ImageContainer from './components/ImageContainer';
 import BaseStats from './components/BaseStats';
 import Info from './components/Info'
 import Moves from './components/Moves'
-import {typeColors} from "./components/data";
+import {typeColors, states} from "./components/data";
 
 //* Main App
 function App() {
   //* APP states
-  const [state, setState] = useState(States.IDLE);
+  const [state, setState] = useState(states.IDLE);
 
   //* Theme state (darkMode on or off)
   const [darkMode, setDarkMode] = useState(false);
@@ -39,13 +38,14 @@ function App() {
   const pokemonData = data?.pokemon;
   const pokemonSpecies = data?.species;
   const abilities = data?.abilities;
+  const pokeMoves = data?.moves;
 
   //* Error
   const [error, setError] = useState(null);
 
   //* Search function
   const handleSearch = async (pokemon)=>{
-    setState(States.LOADING);
+    setState(states.LOADING);
     setError(null);
     setData(null);
     setButton("Stats");
@@ -53,10 +53,10 @@ function App() {
     try {
       const data = await searchPokemon(pokemon);
       setData(data);
-      setState(States.RESULT);
+      setState(states.RESULT);
     } catch (err){
       setError(err);
-      setState(States.ERROR);
+      setState(states.ERROR);
     }
   }
 
@@ -76,6 +76,9 @@ function App() {
     case ("Moves"):
       stat = <Moves pokemonData={pokemonData}
                     shadowColor={shadowColor}
+                    typeColors={typeColors}
+                    darkMode={darkMode}
+                    pokeMoves={pokeMoves}
               />;
       break;
     case ("Info"):
@@ -104,13 +107,13 @@ return (
                 setSearchQuery={setSearchQuery}
                 handleSearch={handleSearch}
                 state={state}
-                disabled = {state === States.LOADING || searchQuery === null || searchQuery === ""}
+                disabled = {state === states.LOADING || searchQuery === null || searchQuery === ""}
       />
     </motion.div>
 
     {/* //* UI Status or Results based on if Idle, if pokemon is found or server error */}
-    {state !== States.RESULT ?
-      <UIStatus state={state} error={error}/> :
+    {state !== states.RESULT ?
+      <UIStatus state={state} states={states} error={error}/> :
       <Results pokemonData={pokemonData}>
         <ImageContainer pokemonData={pokemonData} darkMode={darkMode}
           typeColors={typeColors} shadowColor={shadowColor}

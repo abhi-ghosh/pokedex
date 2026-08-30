@@ -4,11 +4,11 @@ export default function Stats({button, setButton, children}) {
   return (
     //*Stats section div
     <div className="w-full md:max-w-1/2 h-140 bg-card
-    dark:bg-navy flex flex-col justify-between gap-5 p-10 px-4
+    dark:bg-navy flex flex-col justify-stretch gap-5 p-10 px-4
       md:p-10 rounded-b-2xl md:rounded-r-2xl transition-colors duration-300"
     >
       {/*//* Stat buttons div */}
-      <div className="flex flex-row items-center
+      <div className="flex flex-row gap-1 items-center
         justify-evenly p-1 bg-off-white dark:bg-navy-dark font-outfit
         font-bold rounded-full">
         {/*//* Stat buttons mapped over statButtons array */}

@@ -21,20 +21,24 @@
       //* Secondary API for Pokémon species from the data1 from the main API
       const response2 = await fetch (data1.species.url);
 
-      //* Abilities API for Pokémon abilities from from data1 from the main API
+      //* Abilities API for Pokémon abilities from data1 from the main API
       const abilitiesArr = await Promise.all(data1.abilities.map(ability => fetch(ability.ability.url)));
 
+      //* Getting the moves from data1 from the main API
+      const movesArr = await Promise.all(data1.moves.map(move=>fetch(move.move.url)));
+
       //* Checking if the response is ok from the secondary API and abilities API
-      if (!response2.ok || abilitiesArr.some(response => !response.ok)) {
+      if (!response2.ok || abilitiesArr.some(response => !response.ok) || movesArr.some(response => !response.ok)) {
         throw new Error("server-error");
       }
 
-      //* Parsing Pokémon species & Pokémon abilities data
+      //* Parsing Pokémon species, Pokémon abilities & Pokémon moves data
       const data2 = await response2.json();
       const abilities = await Promise.all(abilitiesArr.map(ability => ability.json()));
+      const moves = await Promise.all(movesArr.map(move => move.json()));
 
       //* Combining the data & returning the data object
-      const data = {pokemon: data1, species: data2, abilities: abilities};
+      const data = {pokemon: data1, species: data2, abilities: abilities, moves: moves};
       return data;
   }
   export default searchPokemon;

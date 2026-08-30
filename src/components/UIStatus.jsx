@@ -1,15 +1,14 @@
 import React from 'react';
-import States from './States';
 import { motion, AnimatePresence } from 'motion/react';
 import {LoaderPinwheel, FaceSlightlyFrowning, FaceExpressionless} from 'lucide-react';
 import pokeball from './assets/pokeball.svg';
-export default function Idle({state, error}) {
+export default function Idle({state, states, error}) {
   //* Instead of using 3 different components, we are using the same component
   //* with different rendered content based on the state
 
   //* Title based on state (idle, loading, error)
   let title;
-    if (state ===  States.IDLE){
+    if (state ===  states.IDLE){
       title = (
         <motion.p
           key="idle-title"
@@ -22,7 +21,7 @@ export default function Idle({state, error}) {
           POKÉDEX
         </motion.p>
     );
-    } else if (state === States.LOADING){
+    } else if (state === states.LOADING){
       title = (
         <motion.p
           key="loading-title"
@@ -35,7 +34,7 @@ export default function Idle({state, error}) {
           Loading, please wait..
         </motion.p>
       );
-    } else if (state === States.ERROR){
+    } else if (state === states.ERROR){
       title = (
         <motion.p
           key="error-title"
@@ -68,7 +67,7 @@ export default function Idle({state, error}) {
           {/*//* Idle, Loading & Error Icon */}
           <AnimatePresence mode="wait">
             {/*//* Idle Icon */}
-            {state === States.IDLE &&
+            {state === states.IDLE &&
               <motion.img src={pokeball} key="pokeball"
                 alt="Pokeball" className="h-12 w-12 text-gray-400
                 animate-[spin_3s_linear_infinite]"
@@ -78,7 +77,7 @@ export default function Idle({state, error}) {
               />
             }
             {/*//* Loading Icon */}
-            {state === States.LOADING &&
+            {state === states.LOADING &&
             <motion.div
               initial={{ opacity: 0 }}
               animate={{opacity: 1 }}
@@ -94,7 +93,7 @@ export default function Idle({state, error}) {
             </motion.div>
             }
             {/*//* Error Icons */}
-            {state === States.ERROR &&
+            {state === states.ERROR &&
             <motion.div
               initial={{ opacity: 0 }}
               animate={{opacity: 1 }}
@@ -123,7 +122,7 @@ export default function Idle({state, error}) {
         <AnimatePresence mode="popLayout">
           {title}
           {/*//* Idle Subtitle */}
-          {state === States.IDLE &&
+          {state === states.IDLE &&
           <motion.p className="text-center text-gray-500 font-outfit text-md"
             key="idle-subtitle"
             initial={{ opacity: 0, y: 5 }}
