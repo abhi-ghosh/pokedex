@@ -15,7 +15,7 @@ export default function AbilityPill({number, name, description, hidden, borderCo
       <div className="flex flex-col flex-1 gap-1"
       >
         {/* //* Name & Hidden div */}
-        <div className="flex flex-row justify-between items-center pr-2">
+        <div className="flex flex-row justify-between font-mono items-start pr-2">
           {/* //* Name */}
           <p className="font-mono text-lg font-bold text-gray-500 dark:text-gray-400">
             {name}
@@ -30,7 +30,7 @@ export default function AbilityPill({number, name, description, hidden, borderCo
           </p>
         </div>
         {/* //* Description */}
-        <p className="text-sm dark:text-off-white text-black">{description}</p>
+        <p className="dark:text-off-white font-outfit text-black">{description}</p>
       </div>
     </div>
   )

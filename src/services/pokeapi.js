@@ -1,3 +1,15 @@
+//* API call for Pokémon suggestions from the PokeAPI
+const getSuggestions = async()=>{
+  const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+  if(!response.ok){
+    throw new Error("server-error");
+  }
+  const data = await response.json();
+  const suggestions = data.results.map(pokemon => pokemon.name);
+  return suggestions;
+}
+
+//* Search function API call for Pokémon data from the PokeAPI
   const searchPokemon = async (pokemon)=>{
 
       //* removing spaces and replacing them with "-" in searchQuery
@@ -41,4 +53,4 @@
       const data = {pokemon: data1, species: data2, abilities: abilities, moves: moves};
       return data;
   }
-  export default searchPokemon;
+  export {searchPokemon, getSuggestions};

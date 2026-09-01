@@ -4,7 +4,7 @@ import ThemeToggle from './components/ThemeToggle';
 import Searchbar from './components/Searchbar';
 import Footer from './components/Footer';
 import { color, motion } from "motion/react"
-import searchPokemon from './services/pokeapi';
+import {searchPokemon, getSuggestions} from './services/pokeapi';
 import UIStatus from './components/UIStatus';
 import Results from './components/Results';
 import Stats from './components/Stats';
@@ -12,6 +12,7 @@ import ImageContainer from './components/ImageContainer';
 import BaseStats from './components/BaseStats';
 import Info from './components/Info'
 import Moves from './components/Moves'
+import SearchSuggestions from './components/SearchSuggestions';
 import {typeColors, states} from "./components/data";
 
 //* Main App
@@ -31,7 +32,13 @@ function App() {
   }, [darkMode]);
 
   //* Search state (pokemon name)
-  const [searchQuery, setSearchQuery] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //*Search suggestions visibility state
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  //* Search suggestions array state
+  const [suggestions, setSuggestions] = useState([]);
 
   //* Pokemon (after search response)
   const [data, setData] = useState(null);
@@ -43,12 +50,44 @@ function App() {
   //* Error
   const [error, setError] = useState(null);
 
-  //* Search function
+    //* Search suggestions from the loaded Pokémon names from the useEffect below **
+  const [allPokemonNames, setAllPokemonNames] = useState([]);
+  useEffect(() => {
+      const pokemonNamesFiltered = (allPokemonNames.filter(
+        suggestion => suggestion.startsWith(searchQuery.toLowerCase())).slice(0, 10));
+      setSuggestions(pokemonNamesFiltered);
+  },[searchQuery, allPokemonNames]);
+
+  //* useEffect to get all the available Pokémon names for suggestions when the app loads **
+  useEffect(() => {
+    const getPokemonNames = async () => {
+    try {
+      const suggesArr = await getSuggestions();
+      setAllPokemonNames(suggesArr);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  getPokemonNames();
+  }
+  , []);
+
+  //* Function to handle suggestion click
+  const onSuggestionsClick = (suggestion) => {
+    setShowSuggestions(false);
+    handleSearch(suggestion);
+    setSearchQuery(suggestion);
+  }
+
+  //* Search function for Pokémon data from the PokeAPI
   const handleSearch = async (pokemon)=>{
+    setShowSuggestions(false);
     setState(states.LOADING);
+    setSuggestions([]);
     setError(null);
     setData(null);
     setButton("Stats");
+
     //* API (service) returns a promise so we need to await it
     try {
       const data = await searchPokemon(pokemon);
@@ -107,8 +146,16 @@ return (
                 setSearchQuery={setSearchQuery}
                 handleSearch={handleSearch}
                 state={state}
-                disabled = {state === states.LOADING || searchQuery === null || searchQuery === ""}
-      />
+                suggestions={suggestions}
+                disabled = {state === states.LOADING || searchQuery === ""}
+                showSuggestions={showSuggestions}
+                setShowSuggestions={setShowSuggestions}
+      >
+        <SearchSuggestions suggestions={suggestions}
+          onSuggestionsClick={onSuggestionsClick}
+          searchQuery={searchQuery}
+        />
+      </Searchbar>
     </motion.div>
 
     {/* //* UI Status or Results based on if Idle, if pokemon is found or server error */}
