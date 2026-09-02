@@ -15,7 +15,7 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
         type="text"
         onFocus={() => setShowSuggestions(true)}
         //* Delay hiding suggestions onBlur to allow click event to register
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+        onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
         value={searchQuery}
         placeholder={"Search Pokémon..."}
         onChange={(e) => {
