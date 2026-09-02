@@ -1,11 +1,18 @@
+import {useRef} from "react"
 import {AnimatePresence, motion } from "motion/react"
-import { Search } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 export default function Searchbar({searchQuery, setSearchQuery, handleSearch, disabled, children,
   suggestions, showSuggestions, setShowSuggestions, handleDownArrow, handleUpArrow, suggHighlight, fetchSuggestions}){ {
+    const focusRef = useRef(null);
+    const clearFocus = () => {
+      setSearchQuery("");
+      focusRef.current.focus();
+    }
   return (
     //* Search bar div
     <div className="bg-white dark:bg-navy h-18 w-full p-3.5 rounded-2xl search-container
       flex flex-row items-center justify-center gap-2 shadow-md transition-colors duration-300 relative">
+
       {/*//* Search icon and input field */}
       <Search className="text-gray-500 w-8 h-auto shrink-0"/>
       <input
@@ -13,6 +20,7 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
         border-none font-outfit text-lg placeholder:text-gray-500
         placeholder:text-lg"
         type="text"
+        ref = {focusRef}
         onFocus={() => setShowSuggestions(true)}
         //* Delay hiding suggestions onBlur to allow click event to register
         onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
@@ -29,6 +37,15 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
           e.key === "ArrowUp" && handleUpArrow();
         }}
         />
+
+      {/*//* Clear button */}
+      {searchQuery.length > 0 &&
+        <X className="text-gray-500 w-6 h-auto cursor-pointer shrink-0
+          hover:scale-110 active:scale-95 transition duration-200"
+        onClick={() => clearFocus()}
+        />
+      }
+
       {/*//* Search button */}
       <motion.button className="bg-coral h-full px-4 md:px-6 rounded-3xl text-off-white
         cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
@@ -38,6 +55,7 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
         disabled={disabled}>
           Search
       </motion.button>
+
       {/*//* Search suggestions */}
       <AnimatePresence>
         {searchQuery && searchQuery.length > 0 && suggestions.length > 0 && showSuggestions &&
