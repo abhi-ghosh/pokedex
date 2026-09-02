@@ -14,7 +14,7 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
         type="text"
         onFocus={() => setShowSuggestions(true)}
         //* Delay hiding suggestions onBlur to allow click event to register
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 50)}
+        onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
         value={searchQuery}
         placeholder="Search Pokémon..."
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -29,10 +29,12 @@ export default function Searchbar({searchQuery, setSearchQuery, handleSearch, di
         disabled={disabled}>
           Search
       </motion.button>
+      {/*//* Search suggestions */}
       <AnimatePresence>
         {searchQuery && searchQuery.length > 0 && suggestions.length > 0 && showSuggestions &&
-          <motion.div className="bg-off-white/70 dark:bg-navy/70 backdrop-blur-lg dark:backdrop-blur-md dark:text-off-white font-mono w-full absolute top-20
-            z-10 rounded-2xl shadow-lg transition-colors duration-300 p-2 overflow-hidden"
+          <motion.div className="bg-off-white/70 dark:bg-navy/70 backdrop-blur-md dark:text-off-white
+            font-mono w-full absolute top-20 z-10 rounded-2xl shadow-lg transition-colors duration-300 p-2
+            max-h-[50vh] overflow-y-auto scrollbar-thin scrollbar-thumb-coral scrollbar-track-transparent"
             initial = {{height: 0}}
             animate = {{height: "auto"}}
             exit = {{height: 0}}

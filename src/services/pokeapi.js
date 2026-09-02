@@ -1,11 +1,20 @@
 //* API call for Pokémon suggestions from the PokeAPI
 const getSuggestions = async()=>{
+  //* Fetching all Pokémon names from the PokeAPI
   const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
   if(!response.ok){
     throw new Error("server-error");
   }
   const data = await response.json();
-  const suggestions = data.results.map(pokemon => pokemon.name);
+  const suggestions = data.results.map(pokemon => {
+    //* Get the Pokémon ID (second-to-last part of the URL)
+    const id = pokemon.url.split("/").at(-2);
+    return {
+      name: pokemon.name,
+      //* Making the URL for the sprite with id
+      sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    };
+  });
   return suggestions;
 }
 

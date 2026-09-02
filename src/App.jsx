@@ -51,19 +51,19 @@ function App() {
   const [error, setError] = useState(null);
 
     //* Search suggestions from the loaded Pokémon names from the useEffect below **
-  const [allPokemonNames, setAllPokemonNames] = useState([]);
+  const [allPokemon, setAllPokemon] = useState([]);
   useEffect(() => {
-      const pokemonNamesFiltered = (allPokemonNames.filter(
-        suggestion => suggestion.startsWith(searchQuery.toLowerCase())).slice(0, 10));
+      const pokemonNamesFiltered = (allPokemon.filter(
+        suggestion => suggestion.name.startsWith(searchQuery.toLowerCase())).slice(0, 10));
       setSuggestions(pokemonNamesFiltered);
-  },[searchQuery, allPokemonNames]);
+  },[searchQuery, allPokemon]);
 
   //* useEffect to get all the available Pokémon names for suggestions when the app loads **
   useEffect(() => {
     const getPokemonNames = async () => {
     try {
       const suggesArr = await getSuggestions();
-      setAllPokemonNames(suggesArr);
+      setAllPokemon(suggesArr);
     } catch (err) {
       console.error(err);
     }
@@ -75,8 +75,8 @@ function App() {
   //* Function to handle suggestion click
   const onSuggestionsClick = (suggestion) => {
     setShowSuggestions(false);
-    handleSearch(suggestion);
-    setSearchQuery(suggestion);
+    handleSearch(suggestion.name);
+    setSearchQuery(suggestion.name);
   }
 
   //* Search function for Pokémon data from the PokeAPI
