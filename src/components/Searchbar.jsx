@@ -3,11 +3,16 @@ import {AnimatePresence, motion } from "motion/react"
 import { Search, X } from 'lucide-react'
 export default function Searchbar({searchQuery, setSearchQuery, handleSearch, disabled, children,
   suggestions, showSuggestions, setShowSuggestions, handleDownArrow, handleUpArrow, suggHighlight, fetchSuggestions}){ {
+
+    //* Ref for clear button which also focuses the search input
     const focusRef = useRef(null);
+
+    //* Function to clear the search input & focus on it
     const clearFocus = () => {
       setSearchQuery("");
       focusRef.current.focus();
     }
+
   return (
     //* Search bar div
     <div className="bg-white dark:bg-navy h-18 w-full p-3.5 rounded-2xl search-container
