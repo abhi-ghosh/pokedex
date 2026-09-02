@@ -5,8 +5,23 @@ import MoveMethods from "./MoveMethods";
 import { motion, AnimatePresence } from "motion/react"
 export default function Moves({pokemonData, typeColors, darkMode, pokeMoves}) {
 
+  //* Filtering out the versions that don't have any moves
+  //* filter() decides which versions to keep.
+  //* Outer some() asks: "Does ANY move match this version?"
+  //* Inner some() asks: "Does ANY version_group_detail match this version?"
+  //* The inner some() returns true/false → outer some() uses that →
+  //* outer some() returns true/false → filter() uses that to keep/discard.
+  //* some() stops as soon as it gets true; if nothing matches, it returns false.
+  const availableVersions = versions.filter(version =>
+    pokemonData.moves.some(move =>
+      move.version_group_details.some(
+        vg => vg.version_group.name === version.value
+      )
+    )
+  );
+
   //* Version series state for the dropdown
-  const [versionSeries, setVersionSeries] = useState("red-blue");
+  const [versionSeries, setVersionSeries] = useState(availableVersions[0].value);
 
   //* Finding the selected version object for the select input border color
   const selectedVersion = versions.find(v => v.value === versionSeries);
@@ -36,7 +51,7 @@ export default function Moves({pokemonData, typeColors, darkMode, pokeMoves}) {
 
     //* Main Moves container
     <motion.div className="transition-colors duration-300 flex
-      flex-col gap-5 overflow-y-scroll scrollbar-none"
+      flex-col gap-5 overflow-y-scroll scrollbar-thumb-coral scrollbar-track-transparent"
           initial={{opacity:0}}
           animate={{opacity:1}}
           exit={{opacity:0}}
@@ -52,7 +67,7 @@ export default function Moves({pokemonData, typeColors, darkMode, pokeMoves}) {
         style={{borderColor: selectedVersion.color}}
       >
         {/*//* Mapping over the versions array */}
-        {versions.map(version => <option key={version.name} value={version.value}>{version.name}</option>)}
+        {availableVersions.map(version => <option key={version.name} value={version.value}>{version.name}</option>)}
       </select>
 
       {/*//* Moves container */}

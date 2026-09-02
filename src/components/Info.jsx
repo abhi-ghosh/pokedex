@@ -145,7 +145,8 @@ export default function Info({pokemonData, pokemonSpecies, shadowColor, darkMode
 
   return (
   //* Info Container
-    <motion.div className="flex flex-col gap-6 overflow-y-auto scrollbar-none"
+    <motion.div className="flex flex-col gap-6 overflow-y-auto scrollbar-thumb-coral
+      scrollbar-track-transparent scrollbar-thin"
       initial={{opacity:0}}
       animate={{opacity:1}}
       exit={{opacity:0}}

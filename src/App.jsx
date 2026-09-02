@@ -50,13 +50,44 @@ function App() {
   //* Error
   const [error, setError] = useState(null);
 
-    //* Search suggestions from the loaded Pokémon names from the useEffect below **
+  //* Suggestion highlight state for arrow key navigation
+  const [suggHighlight, setSuggHighlight] = useState(-1);
+
+  //* Functions to handle arrow key navigation for suggestions
+  //*
+  const handleDownArrow = () => {
+    if (suggHighlight < suggestions.length - 1) {
+      setSuggHighlight(prev => prev + 1);
+      setSearchQuery(suggestions[suggHighlight + 1].name);
+    } else {
+      setSuggHighlight(0);
+      setSearchQuery(suggestions[0].name);
+    }
+  }
+  const handleUpArrow = () => {
+    if(suggHighlight > 0) {
+      setSuggHighlight(prev => prev - 1);
+      setSearchQuery(suggestions[suggHighlight - 1].name);
+    } else {
+      setSuggHighlight(suggestions.length - 1);
+      setSearchQuery(suggestions[suggestions.length - 1].name);
+    }
+  }
+
+  //* Search suggestions from the loaded Pokémon names from the useEffect below **
   const [allPokemon, setAllPokemon] = useState([]);
-  useEffect(() => {
+
+  //* Function to fetch suggestions when the input is changes (onChange) **
+  const fetchSuggestions = (pokemonName) => {
       const pokemonNamesFiltered = (allPokemon.filter(
-        suggestion => suggestion.name.startsWith(searchQuery.toLowerCase())).slice(0, 10));
+        suggestion => suggestion.name.startsWith(pokemonName.toLowerCase())).slice(0, 10));
       setSuggestions(pokemonNamesFiltered);
-  },[searchQuery, allPokemon]);
+      //* Show suggestions when searchQuery changes and is not empty (Added this because "esc" hides suggestions..
+      //* but when you type again, suggestions don't show up)
+      setShowSuggestions(true);
+      //* Reset suggestion highlight
+      setSuggHighlight(-1);
+  }
 
   //* useEffect to get all the available Pokémon names for suggestions when the app loads **
   useEffect(() => {
@@ -74,19 +105,20 @@ function App() {
 
   //* Function to handle suggestion click
   const onSuggestionsClick = (suggestion) => {
-    setShowSuggestions(false);
     handleSearch(suggestion.name);
     setSearchQuery(suggestion.name);
+    setSuggHighlight(-1);
   }
 
   //* Search function for Pokémon data from the PokeAPI
   const handleSearch = async (pokemon)=>{
-    setShowSuggestions(false);
+    setSearchQuery(suggestions[suggHighlight]?.name || searchQuery);
     setState(states.LOADING);
     setSuggestions([]);
     setError(null);
     setData(null);
     setButton("Stats");
+    setSuggHighlight(-1);
 
     //* API (service) returns a promise so we need to await it
     try {
@@ -150,10 +182,15 @@ return (
                 disabled = {state === states.LOADING || searchQuery === ""}
                 showSuggestions={showSuggestions}
                 setShowSuggestions={setShowSuggestions}
+                handleDownArrow={handleDownArrow}
+                handleUpArrow={handleUpArrow}
+                suggHighlight={suggHighlight}
+                fetchSuggestions={fetchSuggestions}
       >
         <SearchSuggestions suggestions={suggestions}
           onSuggestionsClick={onSuggestionsClick}
           searchQuery={searchQuery}
+          suggHighlight={suggHighlight}
         />
       </Searchbar>
     </motion.div>
