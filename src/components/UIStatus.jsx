@@ -16,7 +16,7 @@ export default function Idle({state, states, error}) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -5 }}
           transition={{ duration: 0.25 }}
-          className="text-navy-dark dark:text-off-white font-outfit font-bold text-xl"
+          className="text-navy-dark dark:text-off-white font-outfit font-bold leading-none text-xl"
         >
           POKÉDEX
         </motion.p>
@@ -120,10 +120,15 @@ export default function Idle({state, states, error}) {
 
         {/*//* Title from the if statement & subtitle */}
         <AnimatePresence mode="popLayout">
-          {title}
+          <div className="text-center text-navy-dark
+            dark:text-off-white font-outfit font-bold text-xl"
+            key={title}
+          >
+            {title}
+          </div>
           {/*//* Idle Subtitle */}
           {state === states.IDLE &&
-          <motion.p className="text-center text-gray-500 font-outfit text-md"
+          <motion.p className="text-center text-gray-500 font-outfit text-md leading-none"
             key="idle-subtitle"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}

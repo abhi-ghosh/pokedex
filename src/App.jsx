@@ -168,7 +168,10 @@ return (
   <div className="flex flex-col items-center justify-center min-h-screen
   bg-off-white dark:bg-navy-dark p-8 transition-colors duration-300" >
     <motion.div  initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-    className="w-full max-w-2xl mb-8">
+    transition={{ duration: 0.12, ease: "easeOut" }}
+    className="w-full max-w-2xl mb-8"
+    layout
+    >
 
       {/* //* Header and Searchbar */}
       <Header states={states} setState={setState} setSearchQuery={setSearchQuery}>
