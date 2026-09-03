@@ -1,6 +1,3 @@
-Absolutely. Here’s the **cleaned-up final version** — no duplicated sections, no unnecessary code explanations, and with all of the assets you showed included.
-
-````md
 # ⚡ Pokédex
 
 ## Explore. Discover. Gotta know them all.
@@ -295,42 +292,39 @@ One of the most useful concepts was **layout animation** — allowing Motion to 
 
 The application is divided into focused React components rather than keeping the entire interface inside a single component.
 
-```text
 src/
 │
 ├── components/
-│   ├── AbilityPill.jsx
-│   ├── BaseStats.jsx
-│   ├── ClassTab.jsx
-│   ├── CryAudio.jsx
-│   ├── Footer.jsx
-│   ├── Header.jsx
-│   ├── ImageContainer.jsx
-│   ├── Info.jsx
-│   ├── InfoPill.jsx
-│   ├── MoveMethods.jsx
-│   ├── Moves.jsx
-│   ├── MovesPill.jsx
-│   ├── Results.jsx
-│   ├── Searchbar.jsx
-│   ├── SearchSuggestions.jsx
-│   ├── StatPill.jsx
-│   ├── Stats.jsx
-│   ├── ThemeToggle.jsx
-│   ├── UIStatus.jsx
-│   │
-│   ├── assets/
-│   │   ├── pokeball.svg
-│   │   └── readmeAssets/
-│   │
-│   └── data.js
+│ ├── AbilityPill.jsx
+│ ├── BaseStats.jsx
+│ ├── ClassTab.jsx
+│ ├── CryAudio.jsx
+│ ├── Footer.jsx
+│ ├── Header.jsx
+│ ├── ImageContainer.jsx
+│ ├── Info.jsx
+│ ├── InfoPill.jsx
+│ ├── MoveMethods.jsx
+│ ├── Moves.jsx
+│ ├── MovesPill.jsx
+│ ├── Results.jsx
+│ ├── Searchbar.jsx
+│ ├── SearchSuggestions.jsx
+│ ├── StatPill.jsx
+│ ├── Stats.jsx
+│ ├── ThemeToggle.jsx
+│ ├── UIStatus.jsx
+│ │
+│ ├── assets/
+│ │ ├── pokeball.svg
+│ │ └── readmeAssets/
+│ │
+│ └── data.js
 │
 ├── services/
 ├── App.jsx
 ├── App.css
 └── main.jsx
-```
-````
 
 The component structure keeps individual parts of the application easier to understand, maintain, and extend.
 
@@ -355,7 +349,6 @@ The component structure keeps individual parts of the application easier to unde
 
 # 🔄 Application Flow
 
-````text
                               ┌──────────┐
                               │   IDLE   │
                               └────┬─────┘
@@ -406,9 +399,9 @@ Animations are used to provide feedback and maintain visual continuity, rather t
 ## Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/abhi-ghosh/pokedex.git
 cd pokedex
-````
+```
 
 ## Install dependencies
 
@@ -476,4 +469,3 @@ This is a fan-made portfolio project and is not affiliated with Nintendo, Game F
 **Pokédex — v1.0.0**
 
 </p>
-```
