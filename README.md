@@ -58,17 +58,17 @@ Search suggestions appear as the user types, with Pokémon sprites and keyboard 
 
 ---
 
-## 📖 Pokémon Information
+## ⏳ Loading State
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/info_page_light.png" alt="Pokémon Information Light">
+  <img src="./src/components/assets/readmeAssets/loading_state_light.png" alt="Pokédex Loading State Light">
 </p>
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/info_page_dark.png" alt="Pokémon Information Dark">
+  <img src="./src/components/assets/readmeAssets/loading_state_dark.png" alt="Pokédex Loading State Dark">
 </p>
 
-The information view transforms the raw API data into focused sections that are easier to explore.
+A dedicated loading state provides clear feedback while Pokémon data is being retrieved.
 
 ---
 
@@ -100,17 +100,17 @@ The moves interface lets users explore moves by learning method and game version
 
 ---
 
-## ⏳ Loading State
+## 📖 Pokémon Information
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/loading_state_light.png" alt="Pokédex Loading State Light">
+  <img src="./src/components/assets/readmeAssets/info_page_light.png" alt="Pokémon Information Light">
 </p>
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/loading_state_dark.png" alt="Pokédex Loading State Dark">
+  <img src="./src/components/assets/readmeAssets/info_page_dark.png" alt="Pokémon Information Dark">
 </p>
 
-A dedicated loading state provides clear feedback while Pokémon data is being retrieved.
+The information view transforms the raw API data into focused sections that are easier to explore.
 
 ---
 
@@ -135,11 +135,8 @@ Pokédex is fully responsive and adapts its layouts and interactions for smaller
 ## 🏠 Mobile Homepage
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_homepage_light.png" alt="Pokédex Mobile Homepage Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_homepage_dark.png" alt="Pokédex Mobile Homepage Dark">
+  <img src="./src/components/assets/readmeAssets/mobile_homepage_light.png" alt="Pokédex Mobile Homepage Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_homepage_dark.png" alt="Pokédex Mobile Homepage Dark" width="300">
 </p>
 
 ---
@@ -147,47 +144,8 @@ Pokédex is fully responsive and adapts its layouts and interactions for smaller
 ## 🔎 Mobile Search Suggestions
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_suggestions_light.png" alt="Pokédex Mobile Search Suggestions Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_suggestions_dark.png" alt="Pokédex Mobile Search Suggestions Dark">
-</p>
-
----
-
-## 📖 Mobile Information
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_info_page_light.png" alt="Pokédex Mobile Information Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_info_page_dark.png" alt="Pokédex Mobile Information Dark">
-</p>
-
----
-
-## 📊 Mobile Statistics
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_stats_page_light.png" alt="Pokédex Mobile Stats Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_stats_page_dark.png" alt="Pokédex Mobile Stats Dark">
-</p>
-
----
-
-## ⚔️ Mobile Moves
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_moves_page_light.png" alt="Pokédex Mobile Moves Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_moves_page_dark.png" alt="Pokédex Mobile Moves Dark">
+  <img src="./src/components/assets/readmeAssets/mobile_suggestions_light.png" alt="Pokédex Mobile Search Suggestions Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_suggestions_dark.png" alt="Pokédex Mobile Search Suggestions Dark" width="300">
 </p>
 
 ---
@@ -195,11 +153,35 @@ Pokédex is fully responsive and adapts its layouts and interactions for smaller
 ## ⏳ Mobile Loading State
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_loading_state_light.png" alt="Pokédex Mobile Loading State Light">
+  <img src="./src/components/assets/readmeAssets/mobile_loading_state_light.png" alt="Pokédex Mobile Loading State Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_loading_state_dark.png" alt="Pokédex Mobile Loading State Dark" width="300">
 </p>
 
+---
+
+## 📊 Mobile Statistics
+
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_loading_state_dark.png" alt="Pokédex Mobile Loading State Dark">
+  <img src="./src/components/assets/readmeAssets/mobile_stats_page_light.png" alt="Pokédex Mobile Stats Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_stats_page_dark.png" alt="Pokédex Mobile Stats Dark" width="300">
+</p>
+
+---
+
+## ⚔️ Mobile Moves
+
+<p align="center">
+  <img src="./src/components/assets/readmeAssets/mobile_moves_page_light.png" alt="Pokédex Mobile Moves Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_moves_page_dark.png" alt="Pokédex Mobile Moves Dark" width="300">
+</p>
+
+---
+
+## 📖 Mobile Information
+
+<p align="center">
+  <img src="./src/components/assets/readmeAssets/mobile_info_page_light.png" alt="Pokédex Mobile Information Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_info_page_dark.png" alt="Pokédex Mobile Information Dark" width="300">
 </p>
 
 ---
@@ -207,11 +189,8 @@ Pokédex is fully responsive and adapts its layouts and interactions for smaller
 ## ❌ Mobile Error State
 
 <p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_error_light.png" alt="Pokédex Mobile Error State Light">
-</p>
-
-<p align="center">
-  <img src="./src/components/assets/readmeAssets/mobile_error_dark.png" alt="Pokédex Mobile Error State Dark">
+  <img src="./src/components/assets/readmeAssets/mobile_error_light.png" alt="Pokédex Mobile Error State Light" width="300">
+  <img src="./src/components/assets/readmeAssets/mobile_error_dark.png" alt="Pokédex Mobile Error State Dark" width="300">
 </p>
 
 ---
