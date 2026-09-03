@@ -278,43 +278,41 @@ One of the most useful concepts was **layout animation** — allowing Motion to 
 
 The application is divided into focused React components rather than keeping the entire interface inside a single component.
 
+```text
 src/
+├── assets/
+│   ├── pokeball.svg
+│   └── readmeAssets/
 │
 ├── components/
-│ ├── AbilityPill.jsx
-│ ├── BaseStats.jsx
-│ ├── ClassTab.jsx
-│ ├── CryAudio.jsx
-│ ├── Footer.jsx
-│ ├── Header.jsx
-│ ├── ImageContainer.jsx
-│ ├── Info.jsx
-│ ├── InfoPill.jsx
-│ ├── MoveMethods.jsx
-│ ├── Moves.jsx
-│ ├── MovesPill.jsx
-│ ├── Results.jsx
-│ ├── Searchbar.jsx
-│ ├── SearchSuggestions.jsx
-│ ├── StatPill.jsx
-│ ├── Stats.jsx
-│ ├── ThemeToggle.jsx
-│ ├── UIStatus.jsx
-│ │
-│ ├── assets/
-│ │ ├── pokeball.svg
-│ │ └── readmeAssets/
-│ │
-│ └── data.js
+│   ├── AbilityPill.jsx
+│   ├── BaseStats.jsx
+│   ├── ClassTab.jsx
+│   ├── CryAudio.jsx
+│   ├── data.js
+│   ├── Footer.jsx
+│   ├── Header.jsx
+│   ├── ImageContainer.jsx
+│   ├── Info.jsx
+│   ├── InfoPill.jsx
+│   ├── MoveMethods.jsx
+│   ├── Moves.jsx
+│   ├── MovesPill.jsx
+│   ├── Results.jsx
+│   ├── Searchbar.jsx
+│   ├── SearchSuggestions.jsx
+│   ├── StatPill.jsx
+│   ├── Stats.jsx
+│   ├── ThemeToggle.jsx
+│   └── UIStatus.jsx
 │
 ├── services/
+│   └── pokeapi.js
+│
 ├── App.jsx
 ├── App.css
 └── main.jsx
-
-The component structure keeps individual parts of the application easier to understand, maintain, and extend.
-
----
+```
 
 # 🧱 Tech Stack
 
