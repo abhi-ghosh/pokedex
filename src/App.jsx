@@ -171,7 +171,7 @@ return (
     className="w-full max-w-2xl mb-8">
 
       {/* //* Header and Searchbar */}
-      <Header>
+      <Header states={states} setState={setState} setSearchQuery={setSearchQuery}>
         <ThemeToggle darkMode={darkMode} changeTheme={changeTheme}/>
       </Header>
       <Searchbar searchQuery={searchQuery}
